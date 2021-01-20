@@ -1,28 +1,11 @@
 <?php include('header.php');
 include("../../auth_session.php");
-<<<<<<< Updated upstream
+
 require('../../db.php');
  ?>
-=======
-require('db.php');
-    
-  
-?>
 
->>>>>>> Stashed changes
 
-   <?php if($_POST['update']){
-                     
-                   $id = $_POST['id'];
-                    $name = $_POST['username'];
-                     $email = $_POST['email'];
-                     $type = $_POST['type'];
-}
-        mysqli_query($con, "UPDATE users SET username='$name', email='$email',type='$type' WHERE id=$id");
-        
- 
-  
-?>
+
 
     <div class="main-panel">
       <!-- Navbar -->
@@ -185,11 +168,7 @@ require('db.php');
               </div>
             </div>
           </div> -->
-<<<<<<< Updated upstream
-          
-=======
-         
->>>>>>> Stashed changes
+
         </div>
       </div>
       <footer class="footer">
