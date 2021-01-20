@@ -1,4 +1,5 @@
 <?php include('header.php');
+include("../../auth_session.php");
 require('db.php');
  ?>
 
@@ -68,15 +69,7 @@ require('db.php');
           </div>
         </div>
       </nav>
-   <?php// session_start();
-   $username=$_SESSION['username'];
-   echo $username;
-     $sql = "SELECT * FROM users where id=";
-$result = $con->query($sql);
-
-print_r($result);
-?>
-      <!-- End Navbar -->
+     <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
           <div class="row">
@@ -87,70 +80,43 @@ print_r($result);
                   <p class="card-category">Complete your profile</p>
                 </div>
                 <div class="card-body">
-                  <form>
+                  <form action="" method="post">
                     <div class="row">
-                      <?php while($row = $result->fetch_assoc()) {?>
+                        <?php
+   $username= $_SESSION['username'];
+ 
+     $sql = "SELECT * FROM users where username='$username'";
+     
+$result = $con->query($sql);
+
+?>
+  
+                      <?php while($row = $result->fetch_assoc()) { print_r($row);?>
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control" name="<?php echo $row['username'];?>">
+                          <input type="text" class="form-control"name='username' value="<?php echo $row['username'];?>">
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Email Id</label>
-                          <input type="text" class="form-control" name="<?php echo $row['email'];?>">
+                          <label >Email Id</label>
+                          <input type="text" class="form-control" name="email" value='<?php echo $row['email'];?>'>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Email address</label>
-                          <input type="email" class="form-control">
+                          <label class="bmd-label-floating">Type</label>
+                          <input type="hidden" class="form-control" name="id" value='<?php echo $row['id'];?>'>
+                          <input type="text" class="form-control" name="type"value='<?php echo $row['type'];?>'>
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Fist Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Last Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Adress</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">City</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Country</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Postal Code</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div><?php } ?>
-                    </div>
+                    </div><?php } ?>
+                  <button type="submit" name='update' class="btn btn-primary pull-right">Update Profile</button></form>
+                    </div></form>
+                    
+                   
+                  
                 <!--     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
@@ -164,7 +130,7 @@ print_r($result);
                     </div> -->
                     <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
                     <div class="clearfix"></div>
-                  </form>
+                  
                 </div>
               </div>
             </div>
@@ -186,6 +152,18 @@ print_r($result);
               </div>
             </div>
           </div> -->
+            <?php if($_POST['update']){
+                     
+                  $id=$_POST['id'];
+                  $name=$_POST['username'];
+                    $email=$_POST['email'];
+                    $type=$_POST['type'];
+}
+        mysqli_query($con, "UPDATE users SET username='$name', email='$email',type='$type' WHERE id=$id");
+        header("Refresh:0");
+ 
+  
+?>
         </div>
       </div>
       <footer class="footer">

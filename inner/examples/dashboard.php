@@ -1,4 +1,5 @@
-<?php include('header.php'); ?>
+<?php include('header.php');
+include("../../auth_session.php"); ?>
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
