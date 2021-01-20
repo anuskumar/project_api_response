@@ -12,48 +12,46 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Activities Table</h4>
+                  <h4 class="card-title ">Activities </h4>
                   <p class="card-category"> </p>
                 </div>
                 <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table" id="example">
-                       <thead class=" text-primary">
-                        <th>
-                          Slno
-                        </th>
-                        
-                        <th>
-                          Activities
-                        </th>
-                        <th>
-                     	 Fetch
-                        </th>
-                      </thead>
-                      <tbody>
-                       
-                         <?php
-                $no=1;
-            for ($x = 0; $x <= 10; $x++) {?>
-  			 <tr>
-  			 	<td><?php echo $no++ ?></td>
-
-  			 	<td>	<?php 
-  			 	// print_r($_SESSION);
-  			 	$type= $_SESSION['type'];
-            $content = file_get_contents("http://www.boredapi.com/api/activity?type=".$type);
+                  <div class="data-tables table-responsive">
+            <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
+              <thead class="bg-light text-capitalize">
+                <?php 
+          // print_r($_SESSION);
+          $key=$_GET['key'];
+            $content = file_get_contents("http://www.boredapi.com/api/activity?key=".$key);
 
             $result  = json_decode($content);
 
-            print_r( $result->activity ); ?></td>  
-            <td><a class="btn btn-primary" href="show_activities.php?key=<?php print_r( $result->key ); ?>">Fetch</a></td>
-        </tr>
-
-           <?php } ?>
-          </tbody>
-                       
-                      </tbody>
-                    </table>
+            // print_r( $result->activity );
+             ?>
+                <tr>
+                 <td>ACTIVITY</td>
+                 <td><?php print_r( $result->activity );?></td>
+                </tr>
+                <tr>
+                 <td>TYPE</td>
+                 <td><?php print_r( $result->type );?></td>
+                </tr>
+                <tr>
+                 <td>PARTICIPANTS</td>
+                 <td><?php print_r( $result->participants );?></td>
+                </tr>
+                <tr>
+                 <td>PRICE</td>
+                 <td><?php print_r( $result->price );?></td>
+                </tr>
+                <tr>
+                 <td>LINK</td>
+                 <td><?php print_r( $result->link );?></td>
+                </tr>
+              </thead>
+            </table>
+            <button class="btn btn-primary" onclick="window.history.back()">BACK</button>
+                 
                   </div>
                 </div>
               </div>
