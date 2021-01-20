@@ -1,7 +1,20 @@
 <?php include('header.php');
 include("../../auth_session.php");
-require('db.php');
+require('../../db.php');
  ?>
+
+   <?php if($_POST['update']){
+                     
+                   $id = $_POST['id'];
+                    $name = $_POST['username'];
+                     $email = $_POST['email'];
+                     $type = $_POST['type'];
+}
+        mysqli_query($con, "UPDATE users SET username='$name', email='$email',type='$type' WHERE id=$id");
+        
+ 
+  
+?>
 
     <div class="main-panel">
       <!-- Navbar -->
@@ -80,18 +93,18 @@ require('db.php');
                   <p class="card-category">Complete your profile</p>
                 </div>
                 <div class="card-body">
-                  <form action="" method="post">
+                  <form action="user.php" method="post">
                     <div class="row">
                         <?php
-   $username= $_SESSION['username'];
- 
-     $sql = "SELECT * FROM users where username='$username'";
-     
-$result = $con->query($sql);
+             $username= $_SESSION['username'];
+           
+               $sql = "SELECT * FROM users where username='$username'";
+               
+          $result = $con->query($sql);
 
-?>
+              ?>
   
-                      <?php while($row = $result->fetch_assoc()) { print_r($row);?>
+                      <?php while($row = $result->fetch_assoc()) { ($row);?>
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Username</label>
@@ -104,11 +117,23 @@ $result = $con->query($sql);
                           <input type="text" class="form-control" name="email" value='<?php echo $row['email'];?>'>
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-10">
                         <div class="form-group">
                           <label class="bmd-label-floating">Type</label>
                           <input type="hidden" class="form-control" name="id" value='<?php echo $row['id'];?>'>
-                          <input type="text" class="form-control" name="type"value='<?php echo $row['type'];?>'>
+                          <!-- <input type="text" class="form-control" name="type" value='<?php echo $row['type'];?>'> -->
+                           <select class="form-control" name="type" required="required"  >
+                            <option value="<?php echo $row['type'];?>"><?php echo $row['type'];?></option> 
+                            <option value="education">  education</option> 
+                            <option value="recreational">recreational  </option> 
+                            <option value="social">social  </option> 
+                            <option value="diy"> diy </option> 
+                            <option value="charity"> charity </option> 
+                            <option value="cooking">cooking  </option> 
+                            <option value="relaxation">relaxation  </option> 
+                            <option value="music"> music </option> 
+                            <option value="busywork"> busywork </option> 
+                        </select>
                         </div>
                       </div>
                     </div><?php } ?>
@@ -152,18 +177,7 @@ $result = $con->query($sql);
               </div>
             </div>
           </div> -->
-            <?php if($_POST['update']){
-                     
-                  $id=$_POST['id'];
-                  $name=$_POST['username'];
-                    $email=$_POST['email'];
-                    $type=$_POST['type'];
-}
-        mysqli_query($con, "UPDATE users SET username='$name', email='$email',type='$type' WHERE id=$id");
-        header("Refresh:0");
- 
-  
-?>
+          
         </div>
       </div>
       <footer class="footer">
