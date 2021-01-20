@@ -1,5 +1,21 @@
 <?php include("../../auth_session.php");
- include('header.php'); ?>
+ include('header.php');
+ require('../../db.php'); 
+ $id = $_SESSION['id'];
+ $date= date('Y-m-d');
+ $query    = "SELECT * FROM `activities` WHERE date_show='$date'
+                     AND user_id= $id";
+        $result1= mysqli_query($con, $query) or die(mysql_error());
+         $rows1 = mysqli_num_rows($result1);
+         if($rows1>2){?>
+          <script type="text/javascript">
+   alert("Warning!..THE MAXIMUM LIMIT EXEEDED..ONLY 2 PER DAY ALLOWED");
+   window.history.back();
+</script>
+       <?php   }
+
+        if($rows1>2){echo "MAX LIMIT EXEEDED";
+        die;} ?>
 
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
@@ -50,6 +66,20 @@
                 </tr>
               </thead>
             </table>
+            <?php
+              if($rows1<2){
+
+                 $query123    = "SELECT * FROM `activities` WHERE date_show='$date'
+                     AND user_id= $id AND activity_key=$key";
+                  $result123   = mysqli_query($con, $query123);
+                  $rows123 = mysqli_num_rows($result123);
+                  if($rows123==0){
+
+                $query = "INSERT into `activities` (user_id, activity_key, date_show)
+                     VALUES ('$id','$key','$date')";
+                $result   = mysqli_query($con, $query);}
+          
+         }?>
             <button class="btn btn-primary" onclick="window.history.back()">BACK</button>
                  
                   </div>

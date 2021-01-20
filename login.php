@@ -21,7 +21,7 @@
         $result = mysqli_query($con, $query) or die(mysql_error());
          $rows = mysqli_num_rows($result);
         while($row = $result->fetch_assoc()) {
-         
+            $_SESSION['id'] = $row["id"];
           $_SESSION['username'] = $row["username"];
             $_SESSION['email'] = $row["email"];
             $_SESSION['user_type'] =$row["user_type"];
