@@ -19,9 +19,16 @@
         $query    = "SELECT * FROM `users` WHERE username='$username'
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($con, $query) or die(mysql_error());
-        $rows = mysqli_num_rows($result);
+         $rows = mysqli_num_rows($result);
+        while($row = $result->fetch_assoc()) {
+         
+          $_SESSION['username'] = $row["username"];
+            $_SESSION['email'] = $row["email"];
+            $_SESSION['user_type'] =$row["user_type"];
+            $_SESSION['type'] = $row["type"]; }
+       
         if ($rows == 1) {
-            $_SESSION['username'] = $username;
+           
             // Redirect to user dashboard page
             header("Location: inner/examples/dashboard.php");
         } else {

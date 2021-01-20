@@ -6,13 +6,6 @@
           <div class="navbar-wrapper">
             <a class="navbar-brand" href="javascript:;">Dashboard</a>
 
-            <?php
-            $content = file_get_contents("http://www.boredapi.com/api/activity?type=recreational");
-
-            $result  = json_decode($content);
-
-            print_r( $result->type );
-            ?>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>

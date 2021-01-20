@@ -56,9 +56,15 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./tables.html">
+            <a class="nav-link" href="./activities.php">
               <i class="material-icons">content_paste</i>
               <p>Activities</p>
+            </a>
+          </li>
+           <li class="nav-item ">
+            <a class="nav-link" href="../../logout.php">
+              <i class="material-icons">content_paste</i>
+              <p>Logout</p>
             </a>
           </li>
          

@@ -25,8 +25,18 @@
         $type    = stripslashes($_REQUEST['type']);
         $type   = mysqli_real_escape_string($con, $type);
 
-        $query    = "INSERT into `users` (username, password, email, create_datetime, type,user_type)
+        $query    = "INSERT into `users` (username, password, email, create_datetime, type ,user_type)
                      VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime','$type','2')";
+        
+       
+        $subject = 'Signup welcome mail';
+        $message = 'Thanks for signup';
+        $headers = 'From: webmaster@example.com' . "\r\n" .
+            'Reply-To: webmaster@example.com' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($email, $subject, $message, $headers);
+
 
 
      $secret = '6Lc0gDIaAAAAAGjH8VETfltW4f2-H2qCcSxFtJyS';
