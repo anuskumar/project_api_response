@@ -502,6 +502,6 @@ if(isset($_POST['update'])){
                     $type=$_POST['type'];
 
         mysqli_query($con, "UPDATE users SET username='$name',email='$email',type='$type' WHERE id=$id");
-        header("Refresh:0");
+        echo '<script>window.location.href = "user.php";</script>';
  }
 ?>

@@ -28,6 +28,27 @@
         $query    = "INSERT into `users` (username, password, email, create_datetime, type ,user_type)
                      VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime','$type','2')";
         
+        $query_pri = "SELECT * FROM `users` WHERE username='$username'";
+                     
+        $result_pri= mysqli_query($con, $query_pri);
+         $rows_pri = mysqli_num_rows($result_pri);
+
+         if($rows_pri>0){
+            echo '<script> alert("User name Already exists!!!")</script>';
+            echo '<script>window.history.back()</script>';
+            die;
+         }
+
+
+         $query_pri12 = "SELECT * FROM `users` WHERE email='$email'";
+                     
+        $result_pri12= mysqli_query($con, $query_pri12);
+         $rows_pri12 = mysqli_num_rows($result_pri12);
+          if($rows_pri12>0){
+            echo '<script> alert("Email name Already exists!!!")</script>';
+            echo '<script>window.history.back()</script>';
+            die;
+         }
        
         $subject = 'Signup welcome mail';
         $message = 'Thanks for signup';
