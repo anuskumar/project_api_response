@@ -87,9 +87,9 @@ require('../../db.php');
                   <form action="user.php" method="post">
                     <div class="row">
                         <?php
-             $username= $_SESSION['username'];
+             $user_id= $_SESSION['id'];
            
-               $sql = "SELECT * FROM users where username='$username'";
+               $sql = "SELECT * FROM users where id='$user_id'";
                
           $result = $con->query($sql);
 
