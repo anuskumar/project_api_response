@@ -16,12 +16,16 @@ if(isset($_POST['update'])){
         mysqli_query($con,"UPDATE activities SET activity_name= '$activity_name' WHERE id=$activity_id");
         echo '<script>window.location.href = "fetched_activities.php";</script>';
  }else{
- 		$key=$_GET['key'];
-   $sql = "SELECT * FROM `activities` WHERE date_show='$date' AND user_id= $id AND activity_key=$key";
+
+   $key=$_GET['key'];
+   $sql = "SELECT * FROM `activities` WHERE  user_id= $id AND activity_key=$key";
                
-          		$result = $con->query($sql);
+             $result = $con->query($sql);
+          
+ 		
 
  }
+ 
 ?>
 
 
@@ -46,7 +50,7 @@ if(isset($_POST['update'])){
                 <tr>
 	                 <th>ACTIVITY</th>
 
-	                 <th><input type="text"  name="activity_name" style="width:400px;border: none;"  
+	                 <th><input type="text"  name="activity_name" style="width:400px;"  
 	                 	value="<?php echo $row['activity_name']; ?>"  >
 	                 	 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
 	                 </th>
